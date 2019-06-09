@@ -12,7 +12,8 @@ const forecast = (latitude, longitude, callback) => {
     } else if (body.error) {
       callback('Unable to find coordinates.');
     } else {
-      callback(undefined, body.daily.data[0].summary + ' It is currently ' + body.currently.temperature + ' degrees out. There is a ' + body.currently.precipProbability + '% chance of rain.');
+      const { summary, temperatureMin, temperatureMax } = body.daily.data[0];
+      callback(undefined, summary + ' It is currently ' + body.currently.temperature + ' degrees out. There is a ' + body.currently.precipProbability + '% chance of rain. Low/high temperature for today: ' + temperatureMin + '/' + temperatureMax + ' degrees.');
     }
   });
 }
